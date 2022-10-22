@@ -40,3 +40,31 @@ const questionsAndAnswers = [
   }
 ];
 
+var startGame = document.querySelector(".start-button");
+var secondsRemaining = 61;
+var zero = 0;
+var questions = document.querySelector(".questions");
+
+startGame.addEventListener("click", function() {
+  if (zero === 0) {
+    zero = setInterval(function(){
+      secondsRemaining--
+      startGame.textContent = secondsRemaining + " seconds remaining";
+      if (secondsRemaining <= 0) {
+        clearInterval(zero);
+        startGame.textContent = "Time has expired!"
+      };
+  }, 1000)
+  };
+  questionChoices()
+});
+
+function questionChoices(){
+  for (let i = 0; i < questionsAndAnswers.length; i++){
+    questionDisplay = questionsAndAnswers[i].question;
+    answersDisplay = questionsAndAnswers[i].answerChoices;
+    questions.textContent = questionDisplay;
+  }
+
+
+}
