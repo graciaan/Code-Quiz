@@ -41,6 +41,7 @@ const questionsAndAnswers = [
 ];
 //variables created in global scope to be used throughout the code
 var startGame = document.querySelector(".start-button");
+var timer = document.querySelector(".timer")
 var secondsRemaining = 61;
 var zero = 0;
 var questions = document.querySelector(".questions");
@@ -54,10 +55,10 @@ startGame.addEventListener("click", function() {
   if (zero === 0) {
     zero = setInterval(function(){
       secondsRemaining--
-      startGame.textContent = secondsRemaining + " seconds remaining";
+      timer.textContent = secondsRemaining + " seconds remaining";
       if (secondsRemaining <= 0) {
         clearInterval(zero);
-        startGame.textContent = "Time has expired!"
+        timer.textContent = "Time has expired!"
       };
   }, 1000)
   };
@@ -90,13 +91,18 @@ function userChoice(event) {
   }
   if (element.textContent == questionsAndAnswers[index].correctAnswer) {
     createDiv.textContent = "Yes! That is correct!"
+    score++
     } else {
     secondsRemaining = secondsRemaining - pentaltyPoints;
     createDiv.textContent = "Incorrect! :( The correct answer is: " +questionsAndAnswers[index].correctAnswer;
+    score--
   }
   index++
   if (index >= questionsAndAnswers.length) {
-    gameOver(); //need to code ending function
+    if (score < 0){
+      score = 0  //this if statement sets it so we can't have a negative score
+    }
+    gameOver(); 
     } else {
       questionChoices(index);
     }
@@ -110,4 +116,38 @@ function gameOver() {
   var quizComplete = document.createElement("h2");
   quizComplete.textContent = "The quiz has ended";
   questions.appendChild(quizComplete);
+  
+  var initialInput = document.createElement("input");
+  initialInput.placeholder = "Type initials here";
+  initialInput.type = "text";
+  initialInput.id = "formInput";
+  questions.appendChild(initialInput);
+  
+  var initialButton = document.createElement("button");
+  initialButton.type = "submit";
+  initialButton.id = "button-form";
+  initialButton.textContent = "submit";
+  questions.appendChild(initialButton);
+  initialButton.addEventListener("click", function(){
+    var userInitial = initialInput.value;
+    if (userInitial === ""){
+      prompt("Please enter your initials")
+    } else {
+      var finalScore = {
+        initials: userInitial, 
+        userScore: score
+      }
+      console.log(finalScore)
+      var allScores = localStorage.getItem("allScores")
+      if (allScores === null){
+        allScores = [];
+      } else {
+        allScores = JSON.parse(allScores)
+      }
+      allScores.push(finalScore);
+      var newScore = JSON.stringify(allScores)
+      localStorage.setItem("allScores", newScore)
+      window.location.replace("./scores.html");
+    }
+  })
 }
