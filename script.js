@@ -109,7 +109,7 @@ function userChoice(event) {
     questions.appendChild(createDiv)
   }
 
-
+//final function for when quiz is over
 function gameOver() {
   questions.innerHTML = "";
   parentList.innerHTML = "";
@@ -117,12 +117,12 @@ function gameOver() {
   quizComplete.textContent = "The quiz has ended";
   questions.appendChild(quizComplete);
   
+  //creates form to submit initials and saves the score & initials to local storage
   var initialInput = document.createElement("input");
   initialInput.placeholder = "Type initials here";
   initialInput.type = "text";
   initialInput.id = "formInput";
   questions.appendChild(initialInput);
-  
   var initialButton = document.createElement("button");
   initialButton.type = "submit";
   initialButton.id = "button-form";
