@@ -1,7 +1,7 @@
 //this creates the screen where users can see their saved scores and initials
-var score = document.querySelector(".score");
-var backButton = document.querySelector(".back-button");
-var clear = document.querySelector(".clear-button");
+var score = document.querySelector("#score");
+var backButton = document.querySelector("#back-button");
+var clear = document.querySelector("#clear-button");
 //event listener that allows the user to clear their scores
 clear.addEventListener("click", function(){
   localStorage.clear();

@@ -40,11 +40,11 @@ const questionsAndAnswers = [
   }
 ];
 //variables created in global scope to be used throughout the code
-var startGame = document.querySelector(".start-button");
-var timer = document.querySelector(".timer")
+var startGame = document.querySelector("#start-button");
+var timer = document.querySelector("#timer")
 var secondsRemaining = 61;
 var zero = 0;
-var questions = document.querySelector(".questions");
+var questions = document.querySelector("#questions");
 var parentList = document.createElement("ul");
 var index = 0;
 var score = 0;
