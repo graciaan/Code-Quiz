@@ -5,10 +5,9 @@
  * User sees first question with multiple choice answers
  * User selects answer
  * If correct, next question is displayed
- * If incorrect, time is subtracted from the timer
+ * If incorrect, time is subtracted from the timer, and the next question is displayed
  * Game ends with clock reaching 0 OR user answers all questions correctly
  * After game ends user can save initials and score
- * User can then go back to start or reset score
  */
 
 //created objects for each question with their multiple choice answers in an array and the correct answer named as well
@@ -105,3 +104,10 @@ function userChoice(event) {
   }
 
 
+function gameOver() {
+  questions.innerHTML = "";
+  parentList.innerHTML = "";
+  var quizComplete = document.createElement("h2");
+  quizComplete.textContent = "The quiz has ended";
+  questions.appendChild(quizComplete);
+}
